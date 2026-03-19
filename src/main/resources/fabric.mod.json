@@ -4,14 +4,18 @@
   "version": "1.0.0",
   "name": "Swing Mod",
   "description": "Custom hand positions and smooth animations",
-  "authors": [ "YourName" ],
+  "authors": [ "93exe" ],
   "contact": { },
   "license": "MIT",
   "icon": "assets/modid/icon.png",
   "environment": "*",
   "entrypoints": {
-    "main": [ "com.example.ExampleMod" ],
-    "modmenu": [ "com.example.ModMenuIntegration" ]
+    "client": [
+      "com.example.ExampleMod"
+    ],
+    "modmenu": [
+      "com.example.ModMenuIntegration"
+    ]
   },
   "mixins": [
     "modid.mixins.json"
