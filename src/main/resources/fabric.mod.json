@@ -1,29 +1,17 @@
 {
   "schemaVersion": 1,
   "id": "swing-mod",
-  "version": "${version}",
+  "version": "1.0.0",
   "name": "Swing Mod",
   "description": "Custom hand positions and smooth animations",
-  "authors": [
-    "YourName"
-  ],
-  "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/fabricmc/fabric-example-mod"
-  },
-  "license": "CC0-1.0",
+  "authors": [ "YourName" ],
+  "contact": { },
+  "license": "MIT",
   "icon": "assets/modid/icon.png",
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "com.example.ExampleMod"
-    ],
-    "client": [
-      "com.example.ExampleClient"
-    ],
-    "modmenu": [
-      "com.example.ModMenuIntegration"
-    ]
+    "main": [ "com.example.ExampleMod" ],
+    "modmenu": [ "com.example.ModMenuIntegration" ]
   },
   "mixins": [
     "modid.mixins.json"
@@ -31,10 +19,6 @@
   "depends": {
     "fabricloader": ">=0.16.5",
     "minecraft": "~1.21.1",
-    "java": ">=21",
-    "fabric-api": "*"
-  },
-  "suggests": {
-    "flamethrower": "*"
+    "java": ">=21"
   }
 }
