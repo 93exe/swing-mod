@@ -26,13 +26,12 @@ public class HandMixin {
     )
     private void renderCustomHand(ClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, float equipProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
         
-        // Позиция из конфига
+        // Позиция из GUI
         matrices.translate(SimpleConfig.x, SimpleConfig.y, SimpleConfig.z);
 
-        // Плавная анимация удара
+        // Плавный удар (как в читах)
         if (swingProgress > 0.0f) {
             float f = (float) Math.sin(Math.sqrt(swingProgress) * Math.PI);
-            // Исправленные методы поворота для 1.21.1
             matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(f * -SimpleConfig.rotationStrength));
             matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(f * -20.0f));
         }
