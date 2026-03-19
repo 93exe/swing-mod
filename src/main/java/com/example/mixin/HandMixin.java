@@ -18,18 +18,14 @@ public class HandMixin {
 
     @Inject(
         method = "renderFirstPersonItem",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/util/math/MatrixStack;push()V",
-            shift = At.Shift.AFTER
-        )
+        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;push()V", shift = At.Shift.AFTER)
     )
     private void renderCustomHand(ClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, float equipProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
         
-        // Позиция из GUI
+        // Смещение руки
         matrices.translate(SimpleConfig.x, SimpleConfig.y, SimpleConfig.z);
 
-        // Плавный удар (как в читах)
+        // Анимация удара
         if (swingProgress > 0.0f) {
             float f = (float) Math.sin(Math.sqrt(swingProgress) * Math.PI);
             matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(f * -SimpleConfig.rotationStrength));
