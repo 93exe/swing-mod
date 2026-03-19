@@ -16,18 +16,25 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(HeldItemRenderer.class)
 public class HandMixin {
 
-    @Inject(method = "renderFirstPersonItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;push()V", shift = At.Shift.AFTER))
+    @Inject(
+        method = "renderFirstPersonItem",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/util/math/MatrixStack;push()V",
+            shift = At.Shift.AFTER
+        )
+    )
     private void renderCustomHand(ClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, float equipProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
         
-        // Берем координаты из нашего GUI
+        // Позиция из конфига
         matrices.translate(SimpleConfig.x, SimpleConfig.y, SimpleConfig.z);
 
-        // Плавная анимация меча как в читах
+        // Плавная анимация удара
         if (swingProgress > 0.0f) {
             float f = (float) Math.sin(Math.sqrt(swingProgress) * Math.PI);
-            // Плавный разворот руки
-            matrices.multiply(RotationAxis.POSITIVE_Y.getDegreesQuaternion(f * -SimpleConfig.rotationStrength));
-            matrices.multiply(RotationAxis.POSITIVE_Z.getDegreesQuaternion(f * -20.0f));
+            // Исправленные методы поворота для 1.21.1
+            matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(f * -SimpleConfig.rotationStrength));
+            matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(f * -20.0f));
         }
     }
 }
