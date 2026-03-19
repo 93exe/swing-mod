@@ -14,10 +14,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(HeldItemRenderer.class)
 public class HandSwingMixin {
     
-    // Этот код вмешивается в процесс отрисовки руки
-    @Inject(method = "renderFirstPersonItem", at = @At("HEAD"))
-    private void onRenderItem(AbstractClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
-        // Здесь можно будет добавить свои настройки позиции руки (как во ViewModel)
-        // Сейчас он просто подтверждает, что миксин работает
+    // В 1.21.1 этот метод может называться по-разному в маппингах, 
+    // но самый безопасный способ "вклиниться" — это renderItem
+    @Inject(method = "renderItem", at = @At("HEAD"), cancellable = true)
+    private void onRenderItem(AbstractClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, float equipProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
+        // Если игра запустится — значит, мы попали в нужный метод!
     }
 }
